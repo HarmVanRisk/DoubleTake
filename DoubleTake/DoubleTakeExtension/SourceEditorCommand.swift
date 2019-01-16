@@ -16,7 +16,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         let linesToClean = invocation.buffer.lines.copy() as! [String]
 //        let selectionLines = invocation.buffer.selections.copy()
         let objCLines = DoubleTakeFilter().objectiveCImports(lines: linesToClean)
-        let removabelLines = DoubleTakeFilter().linesToRemove(linesToFilter: objCLines, removedLines: [String]())
+        let removabelLines = DoubleTakeFilter().duplicateLines(linesToFilter: objCLines, duplicateLines: [String]())
         DoubleTakeFilter().filterLines(linesToFilter: invocation.buffer.lines, removableLines: removabelLines)
         completionHandler(nil)
     }

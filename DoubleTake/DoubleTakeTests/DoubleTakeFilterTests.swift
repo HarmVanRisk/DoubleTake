@@ -9,27 +9,115 @@
 import XCTest
 
 class DoubleTakeFilterTests: XCTestCase {
-//    var editorCommand : SourceEditorCommand!
+    var filter : DoubleTakeFilter!
     override func setUp() {
-//        editorCommand = SourceEditorCommand()
+        filter = DoubleTakeFilter()
     }
 
     override func tearDown() {
-//        editorCommand = nil
+        filter = nil
     }
-
+    
+    func testFilterLines() {
+        let allLines = NSMutableArray(array: ["#import \"file1.h\"\n\r",
+                                              "#import \"file2.h\"\n\r",
+                                              "#import \"file3.h\"\n\r",
+                                              "#import \"file4.h\"\n\r",
+                                              "#import \"file5.h\"\n\r",
+                                              "#import \"file5.h\"\n\r",
+                                              "#import \"file6.h\"\n\r",
+                                              "#import \"file7.h\"\n\r",
+                                              "#import \"file4.h\"\n\r",
+                                              "#import \"file8.h\"\n\r",
+                                              "#import \"file9.h\"\n\r",
+                                              "#import \"file10.h\"\n\r",
+                                              "#import \"file9.h\"\n\r",
+                                              "#import \"file11.h\"\n\r",
+                                              "#import \"file9.h\"\n\r",
+                                              "#import \"file2.h\"\n\r",
+                                              "@interface SomeViewController ()"])
+        let removableLines = ["#import \"file5.h\"\n\r",
+                            "#import \"file4.h\"\n\r",
+                            "#import \"file2.h\"\n\r",
+                            "#import \"file9.h\"\n\r",
+                            "#import \"file9.h\"\n\r"]
+        filter.filterLines(linesToFilter: allLines , removableLines: removableLines)
+        let expectedLines = ["#import \"file1.h\"\n\r",
+                        "#import \"file2.h\"\n\r",
+                        "#import \"file3.h\"\n\r",
+                        "#import \"file4.h\"\n\r",
+                        "#import \"file5.h\"\n\r",
+                        "#import \"file6.h\"\n\r",
+                        "#import \"file7.h\"\n\r",
+                        "#import \"file8.h\"\n\r",
+                        "#import \"file9.h\"\n\r",
+                        "#import \"file10.h\"\n\r",
+                        "#import \"file11.h\"\n\r",
+                        "@interface SomeViewController ()"]
+        let otherAllLines = allLines as! [String]
+        XCTAssertTrue(otherAllLines.elementsEqual(expectedLines))
+    }
+    
+    func testLinesToRemove() {
+        let allLines = ["#import \"file1.h\"\n\r",
+                        "#import \"file2.h\"\n\r",
+                        "#import \"file3.h\"\n\r",
+                        "#import \"file4.h\"\n\r",
+                        "#import \"file5.h\"\n\r",
+                        "#import \"file5.h\"\n\r",
+                        "#import \"file6.h\"\n\r",
+                        "#import \"file7.h\"\n\r",
+                        "#import \"file4.h\"\n\r",
+                        "#import \"file8.h\"\n\r",
+                        "#import \"file9.h\"\n\r",
+                        "#import \"file10.h\"\n\r",
+                        "#import \"file11.h\"\n\r",
+                        "#import \"file2.h\"\n\r",
+                        "@interface SomeViewController ()"]
+        let expectedDuplicateLines = ["#import \"file5.h\"\n\r",
+                                 "#import \"file4.h\"\n\r",
+                                 "#import \"file2.h\"\n\r"]
+        let duplicates = filter.duplicateLines(linesToFilter: allLines, duplicateLines: [String]())
+        XCTAssertTrue(duplicates.elementsEqual(expectedDuplicateLines))
+    }
+    
+    func testObjectiveCImports() {
+        let allLines = ["#import \"file1.h\"\n\r",
+                     "#import \"file2.h\"\n\r",
+                     "#import \"file3.h\"\n\r",
+                     "#import \"file4.h\"\n\r",
+                     "#import \"file5.h\"\n\r",
+                     "#import \"file5.h\"\n\r",
+                     "#import \"file6.h\"\n\r",
+                     "#import \"file7.h\"\n\r",
+                     "@implementation SomeViewController",
+                     "#import \"file8.h\"\n\r",
+                     "@property (weak, nonatomic) IBOutlet UITableView *someTableView;",
+                     "#import \"file6.h\"\n\r",
+                     "static double const someConst = 0.35;",
+                     "#import \"file2.h\"\n\r",
+                     "@interface SomeViewController ()"]
+        let expectedObjCLines = ["#import \"file1.h\"\n\r",
+                                 "#import \"file2.h\"\n\r",
+                                 "#import \"file3.h\"\n\r",
+                                 "#import \"file4.h\"\n\r",
+                                 "#import \"file5.h\"\n\r",
+                                 "#import \"file5.h\"\n\r",
+                                 "#import \"file6.h\"\n\r",
+                                 "#import \"file7.h\"\n\r",
+                                 "#import \"file8.h\"\n\r",
+                                 "#import \"file6.h\"\n\r",
+                                 "#import \"file2.h\"\n\r"]
+        let objcImports = filter.objectiveCImports(lines: allLines)
+        XCTAssertTrue(objcImports.elementsEqual(expectedObjCLines))
+    }
     
     func testContainsStringForRegex() {
-        let filter:DoubleTakeFilter = DoubleTakeFilter()
         let objcImportPattern = "#import|@import"
         XCTAssertTrue(filter.containsString(string: "#import \"1234.h\"", regexPattern: objcImportPattern))
         XCTAssertTrue(filter.containsString(string: "@import Something", regexPattern: objcImportPattern))
         XCTAssertFalse(filter.containsString(string: "import Something", regexPattern: objcImportPattern))
         XCTAssertFalse(filter.containsString(string: "Do we even know what we want to import", regexPattern: objcImportPattern))
-    }
-    
-    func testObjectiveCImports() {
-        
     }
 
     func testPerformanceExample() {

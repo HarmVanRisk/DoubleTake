@@ -13,12 +13,15 @@ class DoubleTakeFilter: NSObject {
     func filterLines(linesToFilter:NSMutableArray, removableLines:[String]) {
         let linesToFilterCopy = linesToFilter
         var mutableRemovableLines = removableLines
-        for line in linesToFilterCopy {
-            if mutableRemovableLines.contains(line as! String) {
-                let indexOfLineToRemove = linesToFilter.index(of: line)
-                linesToFilter.removeObject(at: indexOfLineToRemove)
+        for index in (0...linesToFilterCopy.count-1).reversed() {
+            let line = linesToFilterCopy[index] as! String
+            if mutableRemovableLines.contains(line) {
+                let numberOfIndexes = linesToFilter.count-1
+                let reversedArray = linesToFilter.reversed() as! [String]
+                let indexOfLineToRemoveFromReversedOrder = reversedArray.index(of: line)
+                linesToFilter.removeObject(at: numberOfIndexes-indexOfLineToRemoveFromReversedOrder!)
                 
-                let indexOfRemovedLine = mutableRemovableLines.firstIndex(of: line as! String)
+                let indexOfRemovedLine = mutableRemovableLines.firstIndex(of: line)
                 if indexOfRemovedLine != nil {
                     mutableRemovableLines.remove(at: indexOfRemovedLine!)
                 }
@@ -29,8 +32,8 @@ class DoubleTakeFilter: NSObject {
         }
     }
     
-    func linesToRemove(linesToFilter:[String],removedLines:[String]) -> [String] {
-        var mutableRemovedLines = removedLines
+    func duplicateLines(linesToFilter:[String],duplicateLines:[String]) -> [String] {
+        var mutableRemovedLines = duplicateLines
         var foundLines = [String]()
         for line in linesToFilter {
             if foundLines.contains(line) {
