@@ -10,9 +10,9 @@ import Cocoa
 
 class DoubleTakeFilter: NSObject {
 
-    func filterLines(linesToFilter:NSMutableArray, removableLines:[String]) {
+    func filterLines(linesToFilter:NSMutableArray, removableLines:NSMutableArray) {
         let linesToFilterCopy = linesToFilter
-        var mutableRemovableLines = removableLines
+        let mutableRemovableLines = removableLines
         for index in (0...linesToFilterCopy.count-1).reversed() {
             let line = linesToFilterCopy[index] as! String
             if mutableRemovableLines.contains(line) {
@@ -21,9 +21,9 @@ class DoubleTakeFilter: NSObject {
                 let indexOfLineToRemoveFromReversedOrder = reversedArray.index(of: line)
                 linesToFilter.removeObject(at: numberOfIndexes-indexOfLineToRemoveFromReversedOrder!)
                 
-                let indexOfRemovedLine = mutableRemovableLines.firstIndex(of: line)
-                if indexOfRemovedLine != nil {
-                    mutableRemovableLines.remove(at: indexOfRemovedLine!)
+                let indexOfRemovedLine = mutableRemovableLines.index(of: line)//.firstIndex(of: line)
+                if indexOfRemovedLine != NSNotFound {
+                    mutableRemovableLines.removeObject(at: indexOfRemovedLine)
                 }
             }
             if mutableRemovableLines.count == 0 {
@@ -32,24 +32,24 @@ class DoubleTakeFilter: NSObject {
         }
     }
     
-    func duplicateLines(linesToFilter:[String],duplicateLines:[String]) -> [String] {
-        var mutableRemovedLines = duplicateLines
+    func duplicateLines(linesToFilter:NSMutableArray,duplicateLines:NSMutableArray) -> NSMutableArray {
+        let mutableRemovedLines = duplicateLines
         var foundLines = [String]()
         for line in linesToFilter {
-            if foundLines.contains(line) {
-                mutableRemovedLines.append(line)
+            if foundLines.contains(line as! String) {
+                mutableRemovedLines.add(line)
             } else {
-                foundLines.append(line)
+                foundLines.append(line as! String)
             }
         }
-        return mutableRemovedLines
+        return NSMutableArray(array: mutableRemovedLines)
     }
     
-    func objectiveCImports(lines:[String]) -> [String] {
-        let objCImports = lines.filter { (line:String) -> Bool in
-            return containsString(string: line,regexPattern:"#import|@import")
+    func objectiveCImports(lines:NSMutableArray) -> NSMutableArray {
+        let objCImports = lines.filter { (line) -> Bool in
+            return containsString(string: line as! String,regexPattern:"#import|@import")
         }
-        return objCImports;
+        return NSMutableArray(array:objCImports);
     }
     
     func containsString(string:String ,regexPattern:String) -> Bool {

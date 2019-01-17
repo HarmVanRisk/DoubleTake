@@ -13,10 +13,10 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
     
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
         // Implement your command here, invoking the completion handler when done. Pass it nil on success, and an NSError on failure.
-        let linesToClean = invocation.buffer.lines.copy() as! [String]
-//        let selectionLines = invocation.buffer.selections.copy()
+        let linesToClean = invocation.buffer.lines
+//        let selectionRange = invocation.buffer.selections.firstObject as! XCSourceTextRange
         let objCLines = DoubleTakeFilter().objectiveCImports(lines: linesToClean)
-        let removabelLines = DoubleTakeFilter().duplicateLines(linesToFilter: objCLines, duplicateLines: [String]())
+        let removabelLines = DoubleTakeFilter().duplicateLines(linesToFilter: objCLines, duplicateLines: NSMutableArray())
         DoubleTakeFilter().filterLines(linesToFilter: invocation.buffer.lines, removableLines: removabelLines)
         completionHandler(nil)
     }
