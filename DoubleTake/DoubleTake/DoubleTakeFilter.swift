@@ -21,7 +21,7 @@ class DoubleTakeFilter: NSObject {
                 let indexOfLineToRemoveFromReversedOrder = reversedArray.index(of: line)
                 linesToFilter.removeObject(at: numberOfIndexes-indexOfLineToRemoveFromReversedOrder!)
                 
-                let indexOfRemovedLine = mutableRemovableLines.index(of: line)//.firstIndex(of: line)
+                let indexOfRemovedLine = mutableRemovableLines.index(of: line)
                 if indexOfRemovedLine != NSNotFound {
                     mutableRemovableLines.removeObject(at: indexOfRemovedLine)
                 }
@@ -45,9 +45,9 @@ class DoubleTakeFilter: NSObject {
         return NSMutableArray(array: mutableRemovedLines)
     }
     
-    func objectiveCImports(lines:NSMutableArray) -> NSMutableArray {
+    func findLinesFromRegex(lines:NSMutableArray, regex:String) -> NSMutableArray {
         let objCImports = lines.filter { (line) -> Bool in
-            return containsString(string: line as! String,regexPattern:"#import|@import")
+            return containsString(string: line as! String,regexPattern:regex)
         }
         return NSMutableArray(array:objCImports);
     }

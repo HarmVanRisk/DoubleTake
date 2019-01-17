@@ -9,13 +9,21 @@
 import Foundation
 import XcodeKit
 
+let objCStyleImports = "#import|@import"
+
+
 class SourceEditorCommand: NSObject, XCSourceEditorCommand {
     
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
-        // Implement your command here, invoking the completion handler when done. Pass it nil on success, and an NSError on failure.
-        let linesToClean = invocation.buffer.lines
-//        let selectionRange = invocation.buffer.selections.firstObject as! XCSourceTextRange
-        let objCLines = DoubleTakeFilter().objectiveCImports(lines: linesToClean)
+        let linesToClean : NSMutableArray
+        let selectionRange = invocation.buffer.selections.firstObject as! XCSourceTextRange
+        if selectionRange.start.line == selectionRange.end.line {
+            linesToClean = invocation.buffer.lines
+        } else {
+            let length = selectionRange.end.line+1 - selectionRange.start.line
+            linesToClean = NSMutableArray(array:invocation.buffer.lines.subarray(with: NSMakeRange(selectionRange.start.line, length)))
+        }
+        let objCLines = DoubleTakeFilter().findLinesFromRegex(lines: linesToClean, regex: objCStyleImports)
         let removabelLines = DoubleTakeFilter().duplicateLines(linesToFilter: objCLines, duplicateLines: NSMutableArray())
         DoubleTakeFilter().filterLines(linesToFilter: invocation.buffer.lines, removableLines: removabelLines)
         completionHandler(nil)

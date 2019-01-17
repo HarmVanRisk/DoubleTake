@@ -107,9 +107,8 @@ class DoubleTakeFilterTests: XCTestCase {
                                  "#import \"file8.h\"\n\r",
                                  "#import \"file6.h\"\n\r",
                                  "#import \"file2.h\"\n\r"]
-        let objcImports = filter.objectiveCImports(lines: allLines)
+        let objcImports = filter.findLinesFromRegex(lines: allLines, regex: "#import|@import")
         XCTAssertTrue(objcImports.isEqual(to: expectedObjCLines))
-        //.elementsEqual(expectedObjCLines))
     }
     
     func testContainsStringForRegex() {
