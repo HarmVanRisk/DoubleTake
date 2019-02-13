@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11134" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -673,7 +674,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="DoubleTake" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -703,10 +704,82 @@
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="DoubleTake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="570" height="350"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbq-w4-DZL">
+                                <rect key="frame" x="180" y="20" width="370" height="310"/>
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="moA-zt-F5X">
+                                    <rect key="frame" x="0.0" y="0.0" width="370" height="310"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="wkR-u6-Iy9">
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="310"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="370" height="310"/>
+                                            <size key="maxSize" width="370" height="10000000"/>
+                                            <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        </textView>
+                                    </subviews>
+                                </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="310" id="8vJ-aN-LPq"/>
+                                    <constraint firstAttribute="width" constant="370" id="EsW-NW-OhU"/>
+                                </constraints>
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="X66-cl-LHV">
+                                    <rect key="frame" x="354" y="0.0" width="16" height="310"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xG3-ho-G2X">
+                                <rect key="frame" x="20" y="207" width="123" height="123"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="123" id="WJP-LT-53P"/>
+                                    <constraint firstAttribute="width" constant="123" id="kSX-y6-N8Z"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="DTLogo" id="rVY-XK-fGB"/>
+                            </imageView>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1hB-lF-jNv">
+                                <rect key="frame" x="18" y="153" width="127" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="123" id="0F5-Sa-6Yi"/>
+                                    <constraint firstAttribute="height" constant="46" id="3cP-jk-6bX"/>
+                                </constraints>
+                                <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Welcome to DoubleTake!" id="QOQ-g0-18g">
+                                    <font key="font" size="17" name="ArialMT"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E7L-8S-mrh">
+                                <rect key="frame" x="20" y="20" width="152" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="152" id="qpP-3S-SyW"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="vnl-VU-9X3">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="1hB-lF-jNv" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="4IN-i6-oki"/>
+                            <constraint firstItem="xG3-ho-G2X" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="66L-Ep-iBu"/>
+                            <constraint firstAttribute="bottom" secondItem="Lbq-w4-DZL" secondAttribute="bottom" constant="20" id="69G-1k-aQE"/>
+                            <constraint firstItem="xG3-ho-G2X" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="6tO-Cf-HMl"/>
+                            <constraint firstAttribute="trailing" secondItem="Lbq-w4-DZL" secondAttribute="trailing" constant="20" id="LLW-Zs-cPD"/>
+                            <constraint firstItem="Lbq-w4-DZL" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="ZPS-Ua-cxO"/>
+                            <constraint firstItem="Lbq-w4-DZL" firstAttribute="leading" secondItem="E7L-8S-mrh" secondAttribute="trailing" constant="8" id="pE2-ZP-OMF"/>
+                            <constraint firstItem="E7L-8S-mrh" firstAttribute="top" secondItem="1hB-lF-jNv" secondAttribute="bottom" constant="8" id="wbr-td-goD"/>
+                            <constraint firstAttribute="bottom" secondItem="E7L-8S-mrh" secondAttribute="bottom" constant="20" id="wps-oQ-dGL"/>
+                            <constraint firstItem="E7L-8S-mrh" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="y9r-Kl-WxY"/>
+                            <constraint firstItem="1hB-lF-jNv" firstAttribute="top" secondItem="xG3-ho-G2X" secondAttribute="bottom" constant="8" id="zHp-nX-MHa"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -714,4 +787,7 @@
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="DTLogo" width="512" height="512"/>
+    </resources>
 </document>
