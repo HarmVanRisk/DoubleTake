@@ -111,6 +111,35 @@ class DoubleTakeFilterTests: XCTestCase {
         XCTAssertTrue(objcImports.isEqual(to: expectedObjCLines))
     }
     
+    func testSwiftImports() {
+        let allLines = NSMutableArray(array: ["import \"file1.h\"\n\r",
+                                              "import \"file2.h\"\n\r",
+                                              "import \"file3.h\"\n\r",
+                                              "import \"file4.h\"\n\r",
+                                              "import \"file5.h\"\n\r",
+                                              "import \"file5.h\"\n\r",
+                                              "#import \"file6.h\"\n\r",
+                                              "import \"file7.h\"\n\r",
+                                              "@implementation SomeViewController",
+                                              "import \"file8.h\"\n\r",
+                                              "@property (weak, nonatomic) IBOutlet UITableView *someTableView;",
+                                              "#import \"file6.h\"\n\r",
+                                              "static double const someConst = 0.35;",
+                                              "import \"file2.h\"\n\r",
+                                              "@interface SomeViewController ()"])
+        let expectedSwiftLines = ["import \"file1.h\"\n\r",
+                                 "import \"file2.h\"\n\r",
+                                 "import \"file3.h\"\n\r",
+                                 "import \"file4.h\"\n\r",
+                                 "import \"file5.h\"\n\r",
+                                 "import \"file5.h\"\n\r",
+                                 "import \"file7.h\"\n\r",
+                                 "import \"file8.h\"\n\r",
+                                 "import \"file2.h\"\n\r"]
+        let objcImports = filter.findLinesFromRegex(lines: allLines, regex: "(?<!#|@)import")
+        XCTAssertTrue(objcImports.isEqual(to: expectedSwiftLines))
+    }
+    
     func testContainsStringForRegex() {
         let objcImportPattern = "#import|@import"
         XCTAssertTrue(filter.containsString(string: "#import \"1234.h\"", regexPattern: objcImportPattern))
