@@ -1,4 +1,4 @@
-![Alt text](DoubleTakeImages/DTLogo.png "Double Take Logo" width="400" height="400")
+![Alt text](DoubleTakeImages/DTLogo.png "Double Take Logo")
 # DoubleTake
 An Xcode extension that removes duplicate imports from the file you're currently working on
 
