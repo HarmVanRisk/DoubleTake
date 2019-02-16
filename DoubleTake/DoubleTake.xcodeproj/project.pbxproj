@@ -16,6 +16,10 @@
 		4C6129E421EE1ACE0018442F /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6129E321EE1ACE0018442F /* SourceEditorExtension.swift */; };
 		4C6129E621EE1ACE0018442F /* SourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6129E521EE1ACE0018442F /* SourceEditorCommand.swift */; };
 		4C6129EB21EE1ACF0018442F /* DoubleTakeExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4C6129DE21EE1ACE0018442F /* DoubleTakeExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4C6129F121EF3D290018442F /* DoubleTakeFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6129F021EF3D290018442F /* DoubleTakeFilterTests.swift */; };
+		4C6129FD21EF45B80018442F /* DoubleTakeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6129FC21EF45B80018442F /* DoubleTakeFilter.swift */; };
+		4C6129FE21EF45B80018442F /* DoubleTakeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6129FC21EF45B80018442F /* DoubleTakeFilter.swift */; };
+		4C6129FF21EF45B80018442F /* DoubleTakeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6129FC21EF45B80018442F /* DoubleTakeFilter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +70,8 @@
 		4C6129E521EE1ACE0018442F /* SourceEditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorCommand.swift; sourceTree = "<group>"; };
 		4C6129E721EE1ACE0018442F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C6129E821EE1ACF0018442F /* DoubleTakeExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DoubleTakeExtension.entitlements; sourceTree = "<group>"; };
+		4C6129F021EF3D290018442F /* DoubleTakeFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTakeFilterTests.swift; sourceTree = "<group>"; };
+		4C6129FC21EF45B80018442F /* DoubleTakeFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleTakeFilter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +124,7 @@
 		4C6129BB21EE1A280018442F /* DoubleTake */ = {
 			isa = PBXGroup;
 			children = (
+				4C6129FC21EF45B80018442F /* DoubleTakeFilter.swift */,
 				4C6129BC21EE1A280018442F /* AppDelegate.swift */,
 				4C6129BE21EE1A280018442F /* ViewController.swift */,
 				4C6129C021EE1A2A0018442F /* Assets.xcassets */,
@@ -133,6 +140,7 @@
 			children = (
 				4C6129CF21EE1A2A0018442F /* DoubleTakeTests.swift */,
 				4C6129D121EE1A2A0018442F /* Info.plist */,
+				4C6129F021EF3D290018442F /* DoubleTakeFilterTests.swift */,
 			);
 			path = DoubleTakeTests;
 			sourceTree = "<group>";
@@ -288,6 +296,7 @@
 			files = (
 				4C6129BF21EE1A280018442F /* ViewController.swift in Sources */,
 				4C6129BD21EE1A280018442F /* AppDelegate.swift in Sources */,
+				4C6129FD21EF45B80018442F /* DoubleTakeFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +305,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C6129D021EE1A2A0018442F /* DoubleTakeTests.swift in Sources */,
+				4C6129F121EF3D290018442F /* DoubleTakeFilterTests.swift in Sources */,
+				4C6129FE21EF45B80018442F /* DoubleTakeFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +316,7 @@
 			files = (
 				4C6129E421EE1ACE0018442F /* SourceEditorExtension.swift in Sources */,
 				4C6129E621EE1ACE0018442F /* SourceEditorCommand.swift in Sources */,
+				4C6129FF21EF45B80018442F /* DoubleTakeFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +468,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DoubleTake/DoubleTake.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = W253ZV85QH;
@@ -466,6 +479,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.VanRisk.DoubleTake;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -476,6 +490,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DoubleTake/DoubleTake.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = W253ZV85QH;
@@ -486,6 +501,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.VanRisk.DoubleTake;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
@@ -497,7 +513,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AZ9Q3463WM;
+				DEVELOPMENT_TEAM = W253ZV85QH;
 				INFOPLIST_FILE = DoubleTakeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -518,7 +534,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AZ9Q3463WM;
+				DEVELOPMENT_TEAM = W253ZV85QH;
 				INFOPLIST_FILE = DoubleTakeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
